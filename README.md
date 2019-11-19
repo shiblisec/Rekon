@@ -6,3 +6,7 @@ The project contains multiple shell scripts for automating the tasks which most 
 # Read more about it at:
 
 “Fasten your Recon process using Shell Scripting” by Mohd Shibli https://link.medium.com/rGBhyyyAE1
+
+# Pull requests accepted for
+
+* Fixing **search.sh** verbose - highlighting the search keywords in `search.sh` for clear verbose.
