@@ -9,4 +9,4 @@ The project contains multiple shell scripts for automating the tasks which most 
 
 ## Pull requests accepted for
 
-* Fixing **search.sh** verbose - highlighting the search keywords in `search.sh` for clear verbose.
+* Fixing **search.sh** - highlighting the search keywords in `search.sh` for clear verbose.
