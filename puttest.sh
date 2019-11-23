@@ -1,6 +1,6 @@
 #!/bin/bash
 
-for domain in $(cat alive.txt)
+for domain in $(cat $1)
 do
-	curl -i -X PUT -d "hello world"  "${domain}/evil.txt"
+	curl -s -o /dev/null -w "URL: %{url_effective} - Response: %{response_code}\n" -X PUT -d "hello world"  "${domain}/evil.txt"
 done
