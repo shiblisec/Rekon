@@ -20,13 +20,11 @@ searchhtml() {
 	local WORD="${1}"
 	for domain in $(ls responsebody)
 	do
-		echo -e "\n${BOLD}${GREEN}${domain}${NORMAL}"
-		RES=$(cat responsebody/$domain | grep -E "${WORD}")
-		if [ $(echo $RES | wc -c) -le 1 ]
+		RES=$(cat responsebody/$domain | grep -n --color=always "${WORD}")
+		if [ $(echo $RES | wc -c) -gt 1 ]
 		then
-			echo -e "${BOLD}${RED}No results found${NORMAL}"
-		else
-			echo $RES
+			echo -e "\n${BOLD}${GREEN}${domain}${NORMAL}"
+			echo -e $RES
 		fi
 	done
 }
@@ -35,15 +33,12 @@ searchheader() {
 	local WORD="${1}"
         for domain in $(ls headers)
         do
-		echo -e "\n${BOLD}${GREEN}${domain}${NORMAL}"
-                RES=$(cat headers/$domain | grep -E "${WORD}")
-		if [ $(echo $RES | wc -c) -le 1 ]
+                RES=$(cat headers/$domain | grep -n --color=always "${WORD}")
+		if [ $(echo $RES | wc -c) -gt 1 ]
                 then
-                        echo -e "${BOLD}${RED}No results found${NORMAL}"
-                else
+			echo -e "\n${BOLD}${GREEN}${domain}${NORMAL}"
                         echo $RES
                 fi
-
         done
 }
 
@@ -54,12 +49,11 @@ searchjs() {
 		for file in $(ls scriptsresponse/$domain)
 		do
 			echo -e "\n${BOLD}${GREEN}${domain}/${file}${NORMAL}"
-                	RES=$(grep --color -E "${WORD}" scriptsresponse/$domain/$file)
-                	if [ $(echo $RES | wc -c) -le 1 ]
+                	RES=$(grep --color=always -n "${WORD}" scriptsresponse/$domain/$file)
+                	if [ $(echo $RES | wc -c) -gt 1 ]
                 	then
-                        	echo -e "${BOLD}${RED}No results found${NORMAL}"
-                	else
-                        	echo $RES
+				echo -e "\n${BOLD}${GREEN}${domain}${NORMAL}"
+                        	echo -e $RES
                 	fi
 
         	done
@@ -70,12 +64,11 @@ searchnmap() {
         for domain in $(ls nmapscans)
         do
                 echo -e "\n${BOLD}${GREEN}${domain}${NORMAL}"
-                RES=$(cat nmapscans/$domain | grep -E "${WORD}")
+                RES=$(cat nmapscans/$domain | grep -n --color=always "${WORD}")
                 if [ $(echo $RES | wc -c) -le 1 ]
                 then
-                        echo -e "${BOLD}${RED}No results found${NORMAL}"
-                else
-                        echo $RES
+			echo -e "\n${BOLD}${GREEN}${domain}${NORMAL}"
+                        echo -e $RES
                 fi
 
         done
