@@ -1,13 +1,17 @@
 #!/bin/bash
 
-mkdir headers
-mkdir responsebody
+mkdir -p headers
+mkdir -p responsebody
 
-CURRENT_PATH=$(pwd)
+export CURRENT_PATH=$(pwd)
 
-for x in $(cat $1)
-do
-	NAME=$(echo $x | awk -F/ '{print $3}')
-	curl -X GET -H "X-Forwarded-For: evil.com" $x -I > "$CURRENT_PATH/headers/$NAME"
-	curl -s -X GET -H "X-Forwarded-For: evil.com" -L $x > "$CURRENT_PATH/responsebody/$NAME"
-done
+fetch_resp() {
+	echo $1
+	NAME=$(echo $1 | cut -d "/" -f 3)
+	curl -s -X GET -H "X-Forwarded-For: evil.com" $1 -LI > "$CURRENT_PATH/headers/$NAME"
+	curl -s -X GET -H "X-Forwarded-For: evil.com" -L $1 > "$CURRENT_PATH/responsebody/$NAME"
+}
+
+
+export -f fetch_resp
+cat $1 | xargs -P 50 -n 1 -I {} bash -c "fetch_resp {}"
