@@ -8,8 +8,8 @@ export CURRENT_PATH=$(pwd)
 fetch_resp() {
 	echo $1
 	NAME=$(echo $1 | cut -d "/" -f 3)
-	curl -s -X GET -H "X-Forwarded-For: evil.com" $1 -LI > "$CURRENT_PATH/headers/$NAME"
-	curl -s -X GET -H "X-Forwarded-For: evil.com" -L $1 > "$CURRENT_PATH/responsebody/$NAME"
+	curl -s -X GET -H "X-Forwarded-For: evil.com" $1 -kLI > "$CURRENT_PATH/headers/$NAME"
+	curl -s -X GET -H "X-Forwarded-For: evil.com" -kL $1 > "$CURRENT_PATH/responsebody/$NAME"
 }
 
 
