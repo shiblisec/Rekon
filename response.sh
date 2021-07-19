@@ -14,4 +14,5 @@ fetch_resp() {
 
 
 export -f fetch_resp
-cat $1 | xargs -P 50 -n 1 -I {} bash -c "fetch_resp {}"
+## cat $1 | xargs -P 50 -n 1 -I {} bash -c "fetch_resp {}"
+cat $1 | xargs -P 50 -I {} bash -c "fetch_resp {}"
